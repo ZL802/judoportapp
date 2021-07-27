@@ -1,3 +1,5 @@
+import RANK from './rank'
+
 export const ROSTER = [
     {
         id: 0,
@@ -5,7 +7,7 @@ export const ROSTER = [
         image:"/img/blkMJudoka.jpeg",
         age: 35,
         club: "Long Island Judo Club",
-        rank: "Sandan"
+        rank: "Shodan"
 
     },
     {

@@ -1,32 +1,72 @@
 import React, { Component } from 'react'
+import Home from './HomeComponent'
 import Directory from './DirectoryComponent'
 import RosterInfo from './RosterInfoComponent'
-import { View } from 'react-native'
-import { ROSTER } from '../shared/roster'
+import Constants from 'expo-constants'
+import { View, Platform } from 'react-native'
+import { createStackNavigator } from 'react-navigation-stack'
+import { createDrawerNavigator } from 'react-navigation-drawer'
+import { createAppContainer } from 'react-navigation'
 
-class Main extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            roster: ROSTER,
-            selectedRoster: null
+
+const DirectoryNavigator = createStackNavigator(
+    {
+        Directory: { screen: Directory },
+        RosterInfo: { screen: RosterInfo }
+    },
+    {
+        initialRouteName: 'Directory',
+        defaultNavigationOptions: {
+            headerStyle: {
+                backgroundColor: '#5c8cd7'
+            },
+            headerTintColor: '#fff',
+            headerTitleStyle: {
+                color: '#fff'
+            }
         }
     }
+)
 
-    onRosterSelect(rosterId) {
-        this.setState({selectedRoster: rosterId})
+const HomeNavigator = createStackNavigator(
+    {
+        Home:  {screen: Home }
+      
+    },
+    {
+        defaultNavigationOptions: {
+            headerStyle: {
+                backgroundColor: '#5c8cd7'
+            },
+            headerTintColor: '#fff',
+            headerTitleStyle: {
+                color: '#fff'
+            }
+        }
     }
+)
+
+const MainNavigator = createDrawerNavigator(
+    {
+        Home: { screen: HomeNavigator },
+        Directory: { screen: DirectoryNavigator }
+    },
+    {
+        drawerBackgroundColor: '#5c8cd7'
+    }
+)
+
+const AppNavigator = createAppContainer(MainNavigator);
+
+class Main extends Component {
 
     render() {
         return(
-            <View style={{flex: 1}}>
-                <Directory 
-                    roster={this.state.roster}
-                    onPress={rosterId => this.onRosterSelect(rosterId)} 
-                />
-                <RosterInfo
-                    roster={this.state.roster.filter(roster => roster.id === this.state.selectedRoster)[0]}
-                />
+            <View style={{
+                flex: 1,
+                paddingTop: Platform.OS === 'ios' ? 0 : Constants.statusBarHeight  
+            }}>
+               <AppNavigator />
             </View>
         )
     }
