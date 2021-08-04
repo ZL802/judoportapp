@@ -3,6 +3,8 @@ import Home from './HomeComponent'
 import Directory from './DirectoryComponent'
 import RosterInfo from './RosterInfoComponent'
 import About from './AboutComponent'
+import Contact from './ContactComponent'
+import Location from './LocationComponent'
 import Constants from 'expo-constants'
 import { View, Platform } from 'react-native'
 import { createStackNavigator } from 'react-navigation-stack'
@@ -65,11 +67,49 @@ const AboutNavigator = createStackNavigator(
     }
 )
 
+const ContactNavigator = createStackNavigator(
+    {
+        Contact:  {screen: Contact }
+      
+    },
+    {
+        defaultNavigationOptions: {
+            headerStyle: {
+                backgroundColor: '#5c8cd7'
+            },
+            headerTintColor: '#fff',
+            headerTitleStyle: {
+                color: '#fff'
+            }
+        }
+    }
+)
+
+const LocationNavigator = createStackNavigator(
+    {
+        Location:  {screen: Location }
+      
+    },
+    {
+        defaultNavigationOptions: {
+            headerStyle: {
+                backgroundColor: '#5c8cd7'
+            },
+            headerTintColor: '#fff',
+            headerTitleStyle: {
+                color: '#fff'
+            }
+        }
+    }
+)
+
 const MainNavigator = createDrawerNavigator(
     {
         Home: { screen: HomeNavigator },
         Directory: { screen: DirectoryNavigator },
-        About: { screen: AboutNavigator }
+        About: { screen: AboutNavigator },
+        Contact: { screen: ContactNavigator },
+        Location: { screen: LocationNavigator }
     },
     {
         drawerBackgroundColor: '#5c8cd7',
