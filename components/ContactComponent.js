@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { ScrollView, ImageBackground, Text } from 'react-native'
-import { Card } from 'react-native-elements'
+import { Card, Icon } from 'react-native-elements'
 import { CLUBS } from '../shared/clubs'
 
 function RenderContact({item}) {

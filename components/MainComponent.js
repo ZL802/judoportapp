@@ -6,15 +6,26 @@ import About from './AboutComponent'
 import Contact from './ContactComponent'
 import Location from './LocationComponent'
 import Constants from 'expo-constants'
-import { View, Platform } from 'react-native'
+import { View, Platform, StyleSheet } from 'react-native'
 import { createStackNavigator } from 'react-navigation-stack'
 import { createDrawerNavigator, overlayColor } from 'react-navigation-drawer'
 import { createAppContainer } from 'react-navigation'
+import { Icon } from 'react-native-elements'
 
 
 const DirectoryNavigator = createStackNavigator(
     {
-        Directory: { screen: Directory },
+        Directory: { 
+            screen: Directory,
+            navigationOptions: ({navigation}) => ({
+                headerLeft: <Icon
+                    name='users'
+                    type='font-awesome'
+                    iconStyle={styles.stackIcon}
+                    onPress={() => navigation.toggleDrawer()}
+                />
+            })
+         },
         RosterInfo: { screen: RosterInfo }
     },
     {
@@ -33,19 +44,24 @@ const DirectoryNavigator = createStackNavigator(
 
 const HomeNavigator = createStackNavigator(
     {
-        Home:  {screen: Home }
-      
+        Home:  { screen: Home }
     },
     {
-        defaultNavigationOptions: {
+        defaultNavigationOptions: ({navigation}) => ({
             headerStyle: {
                 backgroundColor: '#5c8cd7'
             },
             headerTintColor: '#fff',
             headerTitleStyle: {
                 color: '#fff'
-            }
-        }
+            },
+            headerLeft: <Icon
+                name='home'
+                type='font-awesome'
+                iconStyle={styles.stackIcon}
+                onPress={() => navigation.toggleDrawer()}
+            />
+        })
     }
 )
 
@@ -55,15 +71,21 @@ const AboutNavigator = createStackNavigator(
       
     },
     {
-        defaultNavigationOptions: {
+        defaultNavigationOptions: ({navigation}) => ({
             headerStyle: {
                 backgroundColor: '#5c8cd7'
             },
             headerTintColor: '#fff',
             headerTitleStyle: {
                 color: '#fff'
-            }
-        }
+            },
+            headerLeft: <Icon
+                name='newspaper'
+                type='font-awesome-5'
+                iconStyle={styles.stackIcon}
+                onPress={() => navigation.toggleDrawer()}
+            />
+        })
     }
 )
 
@@ -73,15 +95,21 @@ const ContactNavigator = createStackNavigator(
       
     },
     {
-        defaultNavigationOptions: {
+        defaultNavigationOptions: ({navigation}) => ({
             headerStyle: {
                 backgroundColor: '#5c8cd7'
             },
             headerTintColor: '#fff',
             headerTitleStyle: {
                 color: '#fff'
-            }
-        }
+            },
+            headerLeft: <Icon
+                name='phone-square-alt'
+                type='font-awesome-5'
+                iconStyle={styles.stackIcon}
+                onPress={() => navigation.toggleDrawer()}
+            />
+        })
     }
 )
 
@@ -91,25 +119,91 @@ const LocationNavigator = createStackNavigator(
       
     },
     {
-        defaultNavigationOptions: {
+        defaultNavigationOptions: ({navigation}) => ({
             headerStyle: {
                 backgroundColor: '#5c8cd7'
             },
             headerTintColor: '#fff',
             headerTitleStyle: {
                 color: '#fff'
-            }
-        }
+            },
+            headerLeft: <Icon
+                name='map-pin'
+                type='font-awesome-5'
+                iconStyle={styles.stackIcon}
+                onPress={() => navigation.toggleDrawer()}
+            />
+        })
     }
 )
 
 const MainNavigator = createDrawerNavigator(
     {
-        Home: { screen: HomeNavigator },
-        Directory: { screen: DirectoryNavigator },
-        About: { screen: AboutNavigator },
-        Contact: { screen: ContactNavigator },
-        Location: { screen: LocationNavigator }
+        Home: { 
+            screen: HomeNavigator,
+            navigationOptions: {
+                drawerIcon: ({tintColor}) => (
+                    <Icon
+                    name='home'
+                    type='font-awesome'
+                    size={32}
+                    color={tintColor}
+                />
+                )
+            } 
+        },
+        Directory: { 
+            screen: DirectoryNavigator,
+            navigationOptions: {
+                drawerIcon: ({tintColor}) => (
+                    <Icon
+                        name='users'
+                        type='font-awesome'
+                        size={32}
+                        color={tintColor}
+                    />
+                )
+            }
+         },
+        About: { 
+            screen: AboutNavigator,
+            navigationOptions: {
+                drawerIcon: ({tintColor}) => (
+                    <Icon
+                        name='newspaper'
+                        type='font-awesome-5'
+                        size={32}
+                        color={tintColor}
+                    />
+                )
+            } 
+        },
+        Contact: { 
+            screen: ContactNavigator,
+            navigationOptions: {
+                drawerIcon: ({tintColor}) => (
+                    <Icon
+                        name='phone-square-alt'
+                        type='font-awesome-5'
+                        size={32}
+                        color={tintColor}
+                    />
+                )
+            }
+         },
+        Location: { 
+            screen: LocationNavigator,
+            navigationOptions: {
+                drawerIcon: ({tintColor}) => (
+                    <Icon
+                        name='map-pin'
+                        type='font-awesome-5'
+                        size={32}
+                        color={tintColor}
+                    />
+                )
+            } 
+        }
     },
     {
         drawerBackgroundColor: '#5c8cd7',
@@ -138,5 +232,34 @@ class Main extends Component {
         )
     }
 }
+
+styles = StyleSheet.create({
+    container: {
+        flex: 1,
+    },
+    drawerHeader: {
+        backgroundColor: '#5637DD',
+        height: 140,
+        alignItems: 'center',
+        justifyContent: 'center',
+        flex: 1,
+        flexDirection: 'row'
+    },
+    drawerHeaderText: {
+        color: '#fff',
+        fontSize: 24,
+        fontWeight: 'bold'
+    },
+    drawerImage: {
+        margin: 10,
+        height: 60,
+        width: 60
+    },
+    stackIcon: {
+        marginLeft: 10,
+        color: '#D0020D',
+        fontSize: 32
+    }
+})
 
 export default Main
