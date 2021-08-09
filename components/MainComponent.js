@@ -11,6 +11,7 @@ import { createStackNavigator } from 'react-navigation-stack'
 import { createDrawerNavigator, overlayColor } from 'react-navigation-drawer'
 import { createAppContainer } from 'react-navigation'
 import { Icon } from 'react-native-elements'
+import SafeAreaView from 'react-native-safe-area-view'
 
 
 const DirectoryNavigator = createStackNavigator(
@@ -137,6 +138,19 @@ const LocationNavigator = createStackNavigator(
     }
 )
 
+const CustomDrawerContentComponent = props => (
+    <ScrollView>
+        <SafeAreaView
+            style={styles.container}
+            forceInset={{top: 'always', horizontal: 'never'}}>
+                <View style={{flex: 2}}>
+                    <Text style={styles.drawerHeaderText}>Options</Text>
+                </View>
+                <DrawerItems {...props} />
+            </SafeAreaView>
+    </ScrollView>
+)
+
 const MainNavigator = createDrawerNavigator(
     {
         Home: { 
@@ -207,12 +221,13 @@ const MainNavigator = createDrawerNavigator(
     },
     {
         drawerBackgroundColor: '#5c8cd7',
+        contenComponent: CustomDrawerContentComponent,
         overlayColor: '#FFF',
         contentOptions: {
             activeTintColor: '#FFF',
             activeBackgroundColor: '#D0020D',
             inactiveTintColor: '#FFF',
-            labelStyle: '20px'
+            labelStyle: '32px'
         }
     }
 )

@@ -3,18 +3,17 @@ import { Text, View } from 'react-native'
 import { Card } from 'react-native-elements'
 import { ROSTER } from '../shared/roster'
 
-function RenderRoster({rosterm}) {
-    if (rosterm) {
+function RenderRoster({rosterMem}) {
+    if (rosterMem) {
         return (
-    
             <Card
-                featuredTitle={rosterm.name}
-                image={require('./img/blkMJudoka.jpeg')}>
-                    <Text style={{margin: 10}}>
-                        {rosterm.rank}
-                    </Text>
-            </Card>
-            
+                featuredTitle={rosterMem.name}
+                image={require('./img/blkMJudoka.jpeg')}
+            >
+                <Text style={{margin: 10}}>
+                    {rosterMem.rank}
+                </Text>
+            </Card>    
         )
     }
     return <View />
@@ -34,9 +33,9 @@ class RosterInfo extends Component {
 
     render() {
         const rosterId = this.props.navigation.getParam('rosterId')
-        const rosterm = this.state.roster.filter(rosterm => rosterm.id === rosterId[0])
-        return <RenderRoster rosterm={rosterm} />
-}
+        const rosterMem = this.state.roster.filter(rosterMem => rosterMem.id === rosterId)[0]
+        return <RenderRoster rosterMem={rosterMem} />
+    }
 }
 
 
