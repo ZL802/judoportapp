@@ -9,6 +9,7 @@ function RenderRoster({rosterMem}) {
             <Card
                 featuredTitle={rosterMem.name}
                 image={require('./img/blkMJudoka.jpeg')}
+                imageStyle={{ paddingTop: 440, paddingBottom: -500, borderBottom: 200}}
             >
                 <Text style={{margin: 10}}>
                     {rosterMem.rank}

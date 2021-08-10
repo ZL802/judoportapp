@@ -5,6 +5,7 @@ import RosterInfo from './RosterInfoComponent'
 import About from './AboutComponent'
 import Contact from './ContactComponent'
 import Location from './LocationComponent'
+import RankInfo from './RankComponent'
 import Constants from 'expo-constants'
 import { View, Platform, StyleSheet } from 'react-native'
 import { createStackNavigator } from 'react-navigation-stack'
@@ -117,7 +118,6 @@ const ContactNavigator = createStackNavigator(
 const LocationNavigator = createStackNavigator(
     {
         Location:  {screen: Location }
-      
     },
     {
         defaultNavigationOptions: ({navigation}) => ({
@@ -131,6 +131,29 @@ const LocationNavigator = createStackNavigator(
             headerLeft: <Icon
                 name='map-pin'
                 type='font-awesome-5'
+                iconStyle={styles.stackIcon}
+                onPress={() => navigation.toggleDrawer()}
+            />
+        })
+    }
+)
+
+const RanksNavigator = createStackNavigator(
+    {
+        Progress: {screen: RankInfo }
+    },
+    {
+        defaultNavigationOptions: ({navigation}) => ({
+            headerStyle: {
+                backgroundColor: '#5c8cd7'
+            },
+            headerTintColor: '#fff',
+            headerTitleStyle: {
+                color: '#fff'
+            },
+            headerLeft: <Icon
+                name='book'
+                type='font-awesome'
                 iconStyle={styles.stackIcon}
                 onPress={() => navigation.toggleDrawer()}
             />
@@ -217,6 +240,19 @@ const MainNavigator = createDrawerNavigator(
                     />
                 )
             } 
+        },
+        Progress: {
+            screen: RanksNavigator,
+            navigationOptions: {
+                drawerIcon: ({tintColor}) => (
+                    <Icon
+                        name='book'
+                        type='font-awesome'
+                        size={32}
+                        color={tintColor}
+                    />
+                )
+            }
         }
     },
     {

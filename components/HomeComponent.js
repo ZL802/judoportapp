@@ -6,7 +6,6 @@ import { CLUBS } from '../shared/clubs'
 function RenderItem({item}) {
     if (item) {
         return (
-            
             <Card
             featuredTitle={item.name}
             image={require('./img/lijcbadge.jpg')}
